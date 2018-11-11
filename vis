@@ -1,0 +1,4 @@
+#!/bin/bash
+map2png test_n2.fits
+map2png test_n4.fits
+xv test_*.png

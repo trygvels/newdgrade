@@ -1,0 +1,555 @@
+Intel(R) Advisor can now assist with vectorization and show optimization
+  report messages with your source code.
+See "https://software.intel.com/en-us/intel-advisor-xe" for details.
+
+Intel(R) Fortran Intel(R) 64 Compiler for applications running on Intel(R) 64, Version 18.0.3.222 Build 20180410
+
+Compiler options: -I/mn/stornext/u3/hke/owl/local/src/dagsshealpix/include -I/mn/stornext/u3/hke/owl/local/include -I/mn/stornext/u3/trygvels/compsep/Commander/src/commander/ -I/astro/local/opt/Intel/compilers_and_libraries_2018.3.222/linux/mpi/intel64/include -I/astro/local/opt/Intel/compilers_and_libraries_2018.3.222/linux/mpi/intel64/include -O3 -traceback -qopenmp -qopt-report=5 -parallel -c
+
+    Report from: Interprocedural optimizations [ipo]
+
+  WHOLE PROGRAM (SAFE) [EITHER METHOD]: false
+  WHOLE PROGRAM (SEEN) [TABLE METHOD]: false
+  WHOLE PROGRAM (READ) [OBJECT READER METHOD]: false
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+In the inlining report below:
+   "sz" refers to the "size" of the routine. The smaller a routine's size,
+      the more likely it is to be inlined.
+   "isz" refers to the "inlined size" of the routine. This is the amount
+      the calling routine will grow if the called routine is inlined into it.
+      The compiler generally limits the amount a routine can grow by having
+      routines inlined into it.
+
+Begin optimization report for: NEWDGRADE
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (NEWDGRADE) [1/1=100.0%] newdgrade.f90(1,9)
+  -> EXTERN: (1,9) for_set_reentrancy
+  -> EXTERN: (19,8) mpi_init_
+  -> EXTERN: (20,8) mpi_comm_size_
+  -> EXTERN: (21,8) mpi_comm_rank_
+  -> EXTERN: (24,11) COMM_MAP_MOD^CONSTRUCTOR_MAPINFO
+  -> EXTERN: (25,15) COMM_MAP_MOD^CONSTRUCTOR_MAPINFO
+  -> EXTERN: (26,11) COMM_MAP_MOD^CONSTRUCTOR_MAP
+  -> EXTERN: (27,14) COMM_MAP_MOD^CONSTRUCTOR_MAP
+  -> EXTERN: (32,3) for_alloc_allocatable
+  -> EXTERN: (32,3) for_check_mult_overflow64
+  -> EXTERN: (44,3) for_alloc_allocatable
+  -> EXTERN: (44,3) for_check_mult_overflow64
+  -> EXTERN: (46,3) for_alloc_allocatable
+  -> EXTERN: (46,3) for_check_mult_overflow64
+  -> EXTERN: (48,3) for_alloc_allocatable
+  -> EXTERN: (48,3) for_check_mult_overflow64
+  -> EXTERN: (50,3) __resetsp_inlined
+  -> EXTERN: (50,3) _alloca
+  -> EXTERN: (50,3) __getsp_inlined
+  -> EXTERN: (55,6) for_realloc_lhs
+  -> EXTERN: (55,6) __resetsp_inlined
+  -> EXTERN: (55,6) _alloca
+  -> EXTERN: (55,6) __getsp_inlined
+  -> EXTERN: (59,9) _alloca
+  -> EXTERN: (59,9) __getsp_inlined
+  -> EXTERN: (59,9) __resetsp_inlined
+  -> EXTERN: (63,9) _alloca
+  -> EXTERN: (63,9) __getsp_inlined
+  -> EXTERN: (63,9) __resetsp_inlined
+  -> EXTERN: (67,9) __getsp_inlined
+  -> EXTERN: (67,9) _alloca
+  -> EXTERN: (67,9) __resetsp_inlined
+  -> EXTERN: (69,6) __getsp_inlined
+  -> EXTERN: (69,6) _alloca
+  -> EXTERN: (69,6) _alloca
+  -> EXTERN: (69,6) for_write_seq_lis
+  -> EXTERN: (69,6) __resetsp_inlined
+  -> EXTERN: (71,3) __resetsp_inlined
+  -> EXTERN: (71,3) for_write_seq_lis
+  -> EXTERN: (71,3) _alloca
+  -> EXTERN: (71,3) _alloca
+  -> EXTERN: (71,3) __getsp_inlined
+  -> EXTERN: (73,3) __resetsp_inlined
+  -> EXTERN: (73,3) for_realloc_lhs
+  -> EXTERN: (73,3) _alloca
+  -> EXTERN: (73,3) __getsp_inlined
+  -> EXTERN: (75,8) UDGRADE_NR^UDGRADE_RING_ND_D
+  -> EXTERN: (76,8) mpi_allreduce_
+  -> EXTERN: (77,3) __resetsp_inlined
+  -> EXTERN: (77,3) for_realloc_lhs
+  -> EXTERN: (77,3) _alloca
+  -> EXTERN: (77,3) __getsp_inlined
+  -> EXTERN: (81,3) for_write_int_fmt
+  -> EXTERN: (82,8) __resetsp_inlined
+  -> INDIRECT-: (82,8)  (*((P64*) newdgrade_$MAP$14_V$75f.0.1))[9(SI64)]
+     [[ Unable to inline indirect callsite  <1>]]
+  -> EXTERN: (82,8) __getsp_inlined
+  -> EXTERN: (82,32) for_trim
+  -> EXTERN: (82,44) for_concat
+  -> EXTERN: (82,44) _alloca
+  -> EXTERN: (84,3) for_write_int_fmt
+  -> EXTERN: (85,8) __resetsp_inlined
+  -> INDIRECT-: (85,8)  (*((P64*) newdgrade_$MAP_OUT$11_V$721.0.1))[9(SI64)]
+     [[ Unable to inline indirect callsite  <1>]]
+  -> EXTERN: (85,8) __getsp_inlined
+  -> EXTERN: (85,36) for_trim
+  -> EXTERN: (85,49) for_concat
+  -> EXTERN: (85,49) _alloca
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at newdgrade.f90(36,9)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between INFO%NSIDE (34:36) and RINGPIX(i_ring) (36:9)
+   remark #17106: parallel dependence: assumed FLOW dependence between RINGPIX(i_ring) (36:9) and INFO%NSIDE (34:36)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed ANTI dependence between INFO%NSIDE (34:36) and RINGPIX(i_ring) (36:9)
+   remark #15346: vector dependence: assumed FLOW dependence between RINGPIX(i_ring) (36:9) and INFO%NSIDE (34:36)
+LOOP END
+
+LOOP BEGIN at newdgrade.f90(49,3)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at newdgrade.f90(49,3)
+      remark #25408: memset generated
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed OUTPUT dependence between M_IN(:,:) (49:3) and M_IN(:,:) (49:3)
+      remark #17106: parallel dependence: assumed OUTPUT dependence between M_IN(:,:) (49:3) and M_IN(:,:) (49:3)
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+      remark #25015: Estimate of max trip count of loop=1
+
+      LOOP BEGIN at newdgrade.f90(49,3)
+         remark #17108: loop was not parallelized: insufficient computational work
+         remark #15389: vectorization support: reference M_IN(:,:) has unaligned access
+         remark #15381: vectorization support: unaligned access used inside loop body
+         remark #15305: vectorization support: vector length 2
+         remark #15399: vectorization support: unroll factor set to 2
+         remark #15309: vectorization support: normalized vectorization overhead 0.300
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15451: unmasked unaligned unit stride stores: 1 
+         remark #15475: --- begin vector cost summary ---
+         remark #15476: scalar cost: 4 
+         remark #15477: vector cost: 2.500 
+         remark #15478: estimated potential speedup: 1.450 
+         remark #15488: --- end vector cost summary ---
+         remark #25015: Estimate of max trip count of loop=3
+      LOOP END
+
+      LOOP BEGIN at newdgrade.f90(49,3)
+      <Remainder loop for vectorization>
+         remark #25015: Estimate of max trip count of loop=12
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at newdgrade.f90(50,3)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed FLOW dependence between M_IN(INFO(:),:) (50:3) and MAP(:,:) (50:3)
+   remark #17106: parallel dependence: assumed ANTI dependence between MAP(:,:) (50:3) and M_IN(INFO(:),:) (50:3)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed FLOW dependence between M_IN(INFO(:),:) (50:3) and MAP(:,:) (50:3)
+   remark #15346: vector dependence: assumed ANTI dependence between MAP(:,:) (50:3) and M_IN(INFO(:),:) (50:3)
+
+   LOOP BEGIN at newdgrade.f90(50,3)
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed FLOW dependence between M_IN(INFO(:),:) (50:3) and MAP(:,:) (50:3)
+      remark #17106: parallel dependence: assumed ANTI dependence between MAP(:,:) (50:3) and M_IN(INFO(:),:) (50:3)
+      remark #17106: parallel dependence: assumed OUTPUT dependence between M_IN(INFO(:),:) (50:3) and M_IN(INFO(:),:) (50:3)
+      remark #17106: parallel dependence: assumed OUTPUT dependence between M_IN(INFO(:),:) (50:3) and M_IN(INFO(:),:) (50:3)
+      remark #15344: loop was not vectorized: vector dependence prevents vectorization
+      remark #15346: vector dependence: assumed FLOW dependence between M_IN(INFO(:),:) (50:3) and MAP(:,:) (50:3)
+      remark #15346: vector dependence: assumed ANTI dependence between MAP(:,:) (50:3) and M_IN(INFO(:),:) (50:3)
+      remark #25439: unrolled with remainder by 2  
+   LOOP END
+
+   LOOP BEGIN at newdgrade.f90(50,3)
+   <Remainder>
+   LOOP END
+LOOP END
+
+LOOP BEGIN at newdgrade.f90(53,3)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed ANTI dependence between MAP(i) (54:6) and at (55:6)
+   remark #17106: parallel dependence: assumed FLOW dependence between at (55:6) and MAP(i) (54:6)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at newdgrade.f90(55,6)
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed ANTI dependence between at (55:6) and at (55:6)
+      remark #17106: parallel dependence: assumed FLOW dependence between at (55:6) and at (55:6)
+      remark #17106: parallel dependence: assumed FLOW dependence between at (55:6) and at (55:6)
+      remark #17106: parallel dependence: assumed ANTI dependence between at (55:6) and at (55:6)
+      remark #15388: vectorization support: reference at (55:6) has aligned access
+      remark #15305: vectorization support: vector length 4
+      remark #15309: vectorization support: normalized vectorization overhead 0.571
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15475: --- begin vector cost summary ---
+      remark #15476: scalar cost: 3 
+      remark #15477: vector cost: 1.750 
+      remark #15478: estimated potential speedup: 1.700 
+      remark #15488: --- end vector cost summary ---
+   LOOP END
+
+   LOOP BEGIN at newdgrade.f90(55,6)
+   <Remainder loop for vectorization>
+   LOOP END
+
+   LOOP BEGIN at newdgrade.f90(55,6)
+      remark #25399: memcopy generated
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed OUTPUT dependence between RPIX(:) (55:6) and RPIX(:) (55:6)
+      remark #17106: parallel dependence: assumed OUTPUT dependence between RPIX(:) (55:6) and RPIX(:) (55:6)
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at newdgrade.f90(55,6)
+         remark #17108: loop was not parallelized: insufficient computational work
+         remark #15388: vectorization support: reference RPIX(:) has aligned access
+         remark #15388: vectorization support: reference at (55:6) has aligned access
+         remark #15305: vectorization support: vector length 4
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15448: unmasked aligned unit stride loads: 1 
+         remark #15449: unmasked aligned unit stride stores: 1 
+         remark #15475: --- begin vector cost summary ---
+         remark #15476: scalar cost: 4 
+         remark #15477: vector cost: 0.750 
+         remark #15478: estimated potential speedup: 5.330 
+         remark #15488: --- end vector cost summary ---
+         remark #25015: Estimate of max trip count of loop=6
+      LOOP END
+
+      LOOP BEGIN at newdgrade.f90(55,6)
+      <Remainder loop for vectorization>
+         remark #25015: Estimate of max trip count of loop=24
+      LOOP END
+   LOOP END
+
+   LOOP BEGIN at newdgrade.f90(59,9)
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at newdgrade.f90(59,9)
+         remark #17104: loop was not parallelized: existence of parallel dependence
+         remark #17106: parallel dependence: assumed OUTPUT dependence between M_IN(RPIX(:),:) (59:9) and M_IN(RPIX(:),:) (59:9)
+         remark #17106: parallel dependence: assumed OUTPUT dependence between M_IN(RPIX(:),:) (59:9) and M_IN(RPIX(:),:) (59:9)
+         remark #15388: vectorization support: reference RPIX(:) has aligned access
+         remark #15329: vectorization support: irregularly indexed store was emulated for the variable <M_IN(RPIX(:),:)>, part of index is read from memory
+         remark #15305: vectorization support: vector length 2
+         remark #15399: vectorization support: unroll factor set to 4
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15450: unmasked unaligned unit stride loads: 1 
+         remark #15463: unmasked indexed (or scatter) stores: 1 
+         remark #15475: --- begin vector cost summary ---
+         remark #15476: scalar cost: 6 
+         remark #15477: vector cost: 4.000 
+         remark #15478: estimated potential speedup: 1.490 
+         remark #15488: --- end vector cost summary ---
+      LOOP END
+
+      LOOP BEGIN at newdgrade.f90(59,9)
+      <Remainder loop for vectorization>
+         remark #15388: vectorization support: reference RPIX(:) has aligned access
+         remark #15335: remainder loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+         remark #15305: vectorization support: vector length 2
+         remark #15309: vectorization support: normalized vectorization overhead 1.083
+      LOOP END
+   LOOP END
+
+   LOOP BEGIN at newdgrade.f90(63,9)
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at newdgrade.f90(63,9)
+         remark #17104: loop was not parallelized: existence of parallel dependence
+         remark #17106: parallel dependence: assumed OUTPUT dependence between M_IN(RPIX(:),:) (63:9) and M_IN(RPIX(:),:) (63:9)
+         remark #17106: parallel dependence: assumed OUTPUT dependence between M_IN(RPIX(:),:) (63:9) and M_IN(RPIX(:),:) (63:9)
+         remark #15388: vectorization support: reference RPIX(:) has aligned access
+         remark #15329: vectorization support: irregularly indexed store was emulated for the variable <M_IN(RPIX(:),:)>, part of index is read from memory
+         remark #15305: vectorization support: vector length 2
+         remark #15399: vectorization support: unroll factor set to 4
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15450: unmasked unaligned unit stride loads: 1 
+         remark #15463: unmasked indexed (or scatter) stores: 1 
+         remark #15475: --- begin vector cost summary ---
+         remark #15476: scalar cost: 6 
+         remark #15477: vector cost: 4.000 
+         remark #15478: estimated potential speedup: 1.490 
+         remark #15488: --- end vector cost summary ---
+      LOOP END
+
+      LOOP BEGIN at newdgrade.f90(63,9)
+      <Remainder loop for vectorization>
+         remark #15388: vectorization support: reference RPIX(:) has aligned access
+         remark #15335: remainder loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+         remark #15305: vectorization support: vector length 2
+         remark #15309: vectorization support: normalized vectorization overhead 1.083
+      LOOP END
+   LOOP END
+
+   LOOP BEGIN at newdgrade.f90(67,9)
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at newdgrade.f90(67,9)
+         remark #17104: loop was not parallelized: existence of parallel dependence
+         remark #17106: parallel dependence: assumed OUTPUT dependence between M_IN(RPIX(:),:) (67:9) and M_IN(RPIX(:),:) (67:9)
+         remark #17106: parallel dependence: assumed OUTPUT dependence between M_IN(RPIX(:),:) (67:9) and M_IN(RPIX(:),:) (67:9)
+         remark #15388: vectorization support: reference RPIX(:) has aligned access
+         remark #15329: vectorization support: irregularly indexed store was emulated for the variable <M_IN(RPIX(:),:)>, part of index is read from memory
+         remark #15305: vectorization support: vector length 2
+         remark #15399: vectorization support: unroll factor set to 4
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15450: unmasked unaligned unit stride loads: 1 
+         remark #15463: unmasked indexed (or scatter) stores: 1 
+         remark #15475: --- begin vector cost summary ---
+         remark #15476: scalar cost: 6 
+         remark #15477: vector cost: 4.000 
+         remark #15478: estimated potential speedup: 1.490 
+         remark #15488: --- end vector cost summary ---
+      LOOP END
+
+      LOOP BEGIN at newdgrade.f90(67,9)
+      <Remainder loop for vectorization>
+         remark #15388: vectorization support: reference RPIX(:) has aligned access
+         remark #15335: remainder loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+         remark #15305: vectorization support: vector length 2
+         remark #15309: vectorization support: normalized vectorization overhead 1.083
+      LOOP END
+   LOOP END
+
+   LOOP BEGIN at newdgrade.f90(69,6)
+      remark #25399: memcopy generated
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed OUTPUT dependence between at (69:6) and at (69:6)
+      remark #17106: parallel dependence: assumed OUTPUT dependence between at (69:6) and at (69:6)
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at newdgrade.f90(69,6)
+         remark #17108: loop was not parallelized: insufficient computational work
+         remark #15388: vectorization support: reference at (69:23) has aligned access   [ newdgrade.f90(69,23) ]
+         remark #15389: vectorization support: reference MAP(:) has unaligned access   [ newdgrade.f90(69,23) ]
+         remark #15381: vectorization support: unaligned access used inside loop body
+         remark #15305: vectorization support: vector length 4
+         remark #15309: vectorization support: normalized vectorization overhead 0.600
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15449: unmasked aligned unit stride stores: 1 
+         remark #15450: unmasked unaligned unit stride loads: 1 
+         remark #15475: --- begin vector cost summary ---
+         remark #15476: scalar cost: 4 
+         remark #15477: vector cost: 1.250 
+         remark #15478: estimated potential speedup: 2.900 
+         remark #15488: --- end vector cost summary ---
+         remark #25015: Estimate of max trip count of loop=6
+      LOOP END
+
+      LOOP BEGIN at newdgrade.f90(69,6)
+      <Remainder loop for vectorization>
+         remark #25015: Estimate of max trip count of loop=24
+      LOOP END
+   LOOP END
+
+   LOOP BEGIN at newdgrade.f90(69,6)
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at newdgrade.f90(69,6)
+      <Peeled loop for vectorization>
+         remark #25015: Estimate of max trip count of loop=1
+      LOOP END
+
+      LOOP BEGIN at newdgrade.f90(69,6)
+         remark #17108: loop was not parallelized: insufficient computational work
+         remark #15388: vectorization support: reference at (69:18) has aligned access   [ newdgrade.f90(69,18) ]
+         remark #15389: vectorization support: reference at (69:6) has unaligned access
+         remark #15381: vectorization support: unaligned access used inside loop body
+         remark #15328: vectorization support: irregularly indexed load was emulated for the variable <M_IN(:,:)>, part of index is read from memory   [ newdgrade.f90(69,18) ]
+         remark #15305: vectorization support: vector length 2
+         remark #15309: vectorization support: normalized vectorization overhead 1.300
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15449: unmasked aligned unit stride stores: 1 
+         remark #15450: unmasked unaligned unit stride loads: 1 
+         remark #15462: unmasked indexed (or gather) loads: 1 
+         remark #15475: --- begin vector cost summary ---
+         remark #15476: scalar cost: 6 
+         remark #15477: vector cost: 5.000 
+         remark #15478: estimated potential speedup: 1.180 
+         remark #15488: --- end vector cost summary ---
+      LOOP END
+
+      LOOP BEGIN at newdgrade.f90(69,6)
+      <Remainder loop for vectorization>
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at newdgrade.f90(71,3)
+   remark #25399: memcopy generated
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed OUTPUT dependence between at (71:3) and at (71:3)
+   remark #17106: parallel dependence: assumed OUTPUT dependence between at (71:3) and at (71:3)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at newdgrade.f90(71,3)
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15388: vectorization support: reference at (71:20) has aligned access   [ newdgrade.f90(71,20) ]
+      remark #15389: vectorization support: reference MAP(:) has unaligned access   [ newdgrade.f90(71,20) ]
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15305: vectorization support: vector length 4
+      remark #15309: vectorization support: normalized vectorization overhead 0.600
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15450: unmasked unaligned unit stride loads: 1 
+      remark #15475: --- begin vector cost summary ---
+      remark #15476: scalar cost: 4 
+      remark #15477: vector cost: 1.250 
+      remark #15478: estimated potential speedup: 2.900 
+      remark #15488: --- end vector cost summary ---
+      remark #25015: Estimate of max trip count of loop=6
+   LOOP END
+
+   LOOP BEGIN at newdgrade.f90(71,3)
+   <Remainder loop for vectorization>
+      remark #25015: Estimate of max trip count of loop=24
+   LOOP END
+LOOP END
+
+LOOP BEGIN at newdgrade.f90(71,3)
+   remark #17108: loop was not parallelized: insufficient computational work
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at newdgrade.f90(71,3)
+   <Peeled loop for vectorization>
+      remark #25015: Estimate of max trip count of loop=1
+   LOOP END
+
+   LOOP BEGIN at newdgrade.f90(71,3)
+      remark #17108: loop was not parallelized: insufficient computational work
+      remark #15388: vectorization support: reference at (71:15) has aligned access   [ newdgrade.f90(71,15) ]
+      remark #15389: vectorization support: reference at (71:3) has unaligned access
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15328: vectorization support: irregularly indexed load was emulated for the variable <M_IN(:,:)>, part of index is read from memory   [ newdgrade.f90(71,15) ]
+      remark #15305: vectorization support: vector length 2
+      remark #15309: vectorization support: normalized vectorization overhead 1.300
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15450: unmasked unaligned unit stride loads: 1 
+      remark #15462: unmasked indexed (or gather) loads: 1 
+      remark #15475: --- begin vector cost summary ---
+      remark #15476: scalar cost: 6 
+      remark #15477: vector cost: 5.000 
+      remark #15478: estimated potential speedup: 1.180 
+      remark #15488: --- end vector cost summary ---
+   LOOP END
+
+   LOOP BEGIN at newdgrade.f90(71,3)
+   <Remainder loop for vectorization>
+   LOOP END
+LOOP END
+
+LOOP BEGIN at newdgrade.f90(73,3)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed FLOW dependence between MAP(:,:) (73:3) and M_IN(MAP(:),:) (73:3)
+   remark #17106: parallel dependence: assumed ANTI dependence between M_IN(MAP(:),:) (73:3) and MAP(:,:) (73:3)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed FLOW dependence between MAP(:,:) (73:3) and M_IN(MAP(:),:) (73:3)
+   remark #15346: vector dependence: assumed ANTI dependence between M_IN(MAP(:),:) (73:3) and MAP(:,:) (73:3)
+
+   LOOP BEGIN at newdgrade.f90(73,3)
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed FLOW dependence between MAP(:,:) (73:3) and M_IN(MAP(:),:) (73:3)
+      remark #17106: parallel dependence: assumed ANTI dependence between M_IN(MAP(:),:) (73:3) and MAP(:,:) (73:3)
+      remark #15344: loop was not vectorized: vector dependence prevents vectorization
+      remark #15346: vector dependence: assumed FLOW dependence between MAP(:,:) (73:3) and M_IN(MAP(:),:) (73:3)
+      remark #15346: vector dependence: assumed ANTI dependence between M_IN(MAP(:),:) (73:3) and MAP(:,:) (73:3)
+      remark #25439: unrolled with remainder by 2  
+   LOOP END
+
+   LOOP BEGIN at newdgrade.f90(73,3)
+   <Remainder>
+   LOOP END
+LOOP END
+
+LOOP BEGIN at newdgrade.f90(77,3)
+   remark #17104: loop was not parallelized: existence of parallel dependence
+   remark #17106: parallel dependence: assumed FLOW dependence between MAP(:,:) (77:3) and BUFFER(MAP(:),:) (77:3)
+   remark #17106: parallel dependence: assumed ANTI dependence between BUFFER(MAP(:),:) (77:3) and MAP(:,:) (77:3)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed FLOW dependence between MAP(:,:) (77:3) and BUFFER(MAP(:),:) (77:3)
+   remark #15346: vector dependence: assumed ANTI dependence between BUFFER(MAP(:),:) (77:3) and MAP(:,:) (77:3)
+
+   LOOP BEGIN at newdgrade.f90(77,3)
+      remark #17104: loop was not parallelized: existence of parallel dependence
+      remark #17106: parallel dependence: assumed FLOW dependence between MAP(:,:) (77:3) and BUFFER(MAP(:),:) (77:3)
+      remark #17106: parallel dependence: assumed ANTI dependence between BUFFER(MAP(:),:) (77:3) and MAP(:,:) (77:3)
+      remark #15344: loop was not vectorized: vector dependence prevents vectorization
+      remark #15346: vector dependence: assumed FLOW dependence between MAP(:,:) (77:3) and BUFFER(MAP(:),:) (77:3)
+      remark #15346: vector dependence: assumed ANTI dependence between BUFFER(MAP(:),:) (77:3) and MAP(:,:) (77:3)
+      remark #25439: unrolled with remainder by 2  
+   LOOP END
+
+   LOOP BEGIN at newdgrade.f90(77,3)
+   <Remainder>
+   LOOP END
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+newdgrade.f90(49,3):remark #34014: optimization advice for memset: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+newdgrade.f90(49,3):remark #34026: call to memset implemented as a call to optimized library version
+newdgrade.f90(55,6):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+newdgrade.f90(55,6):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+newdgrade.f90(55,6):remark #34026: call to memcpy implemented as a call to optimized library version
+newdgrade.f90(69,6):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+newdgrade.f90(69,6):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+newdgrade.f90(69,6):remark #34026: call to memcpy implemented as a call to optimized library version
+newdgrade.f90(71,3):remark #34014: optimization advice for memcpy: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+newdgrade.f90(71,3):remark #34014: optimization advice for memcpy: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+newdgrade.f90(71,3):remark #34026: call to memcpy implemented as a call to optimized library version
+newdgrade.f90(1,9):remark #34051: REGISTER ALLOCATION : [MAIN__] newdgrade.f90:1
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   18[ rax rdx rcx rbx rsi rdi r8-r15 zmm0-zmm3]
+        
+    Routine temporaries
+        Total         :     836
+            Global    :     225
+            Local     :     611
+        Regenerable   :     189
+        Spilled       :      34
+        
+    Routine stack
+        Variables     :    5676 bytes*
+            Reads     :      72 [7.33e+01 ~ 0.6%]
+            Writes    :     155 [2.02e+02 ~ 1.7%]
+        Spills        :     232 bytes*
+            Reads     :      50 [2.32e+02 ~ 1.9%]
+            Writes    :      48 [1.01e+02 ~ 0.8%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINING FOOTNOTES:
+
+<1> The indirectly called subprogram must be resolved to its targets before it 
+can be inlined.  Consider compiling with -ipo or -prof-gen followed by 
+-prof-use.
+
