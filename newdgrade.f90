@@ -30,10 +30,14 @@ program newdgrade ! Write your own comm_data_mod
   ! Ring pixel number (Maybe column 1 is number, and column 2 is pixels?)
   nrings = 4*info%nside-1 ! Number of rings per nside
   allocate(ringpix(1:nrings))
-  do i_ring = 1, nrings    
-     if ((i_ring > 2*info%nside+1) .or. (i_ring < info%nside+1)) then
+  ringpix(1) = 0
+  
+  do i_ring = 2, nrings    
+     if ((i_ring < info%nside+1)) then
         ! north and south hemisphere 
-        ringpix(i_ring) = ringpix(i_ring-1)+4*i_ring
+        ringpix(i_ring) = ringpix(i_ring-1) + 4*(i_ring - 1)
+     else if (i_ring > nrings - info%nside + 1) then
+        ringpix(i_ring) = ringpix(i_ring-1) + 4*(nrings - (i_ring -1) + 1)
      else
         ! equatorial
         ringpix(i_ring) = ringpix(i_ring-1)+4*info%nside
@@ -48,25 +52,32 @@ program newdgrade ! Write your own comm_data_mod
   allocate(buffer(0:map_out%info%npix-1,map_out%info%nmaps))
   m_in                  = 0.d0  ! Sets all values of array to 0
   m_in(info%pix,:) = map%map    ! Puts map into a sparse array per thread
-
   ! Remove data in specific rings (For testing)
   do i = 1, size(map%info%rings)   ! Rings per thread
      r = map%info%rings(i)         ! Ring number
-     rpix=(/ (i, i=ringpix(r),ringpix(r+1)-1) /) ! Returns sequence of pixel values for ring
-     
+     ! k = 0
+     ! do j = ringpix(r), ringpix(r+1)-1 
+     !    rpix(0) =
+     ! end do
+     if (r < nrings) then
+        rpix = (/ (j, j=ringpix(r),ringpix(r+1)-1) /) ! Returns sequence of pixel values for ring
+     else
+        rpix = (/ (j, j=ringpix(r),map%info%npix-1) /)
+     end if
+     !write(*,*) rpix, "::::", ringpix(r), ringpix(r+1) -1, -(ringpix(r)- ringpix(r+1)) 
      ! In south
-     if (r > 2*map%info%nside+1) then
+     if (r > 3*map%info%nside-2) then
         m_in(rpix,:) = 0.d0
              
      ! In equatorial 
-     else if (r > map%info%nside) then
-        m_in(rpix,:) = 1.
-
+     else if (r < map%info%nside+2) then
+       m_in(rpix,:) = 0.d0
+    end if
      ! In north  
-     else
-        m_in(rpix,:) = 0.d0
-     endif
-
+     !else
+     !   m_in(rpix,:) = 0.d0
+     !endif
+  
   enddo 
 
  
